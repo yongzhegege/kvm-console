@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserDao">
+	<resultMap id="UserMap"  type="com.example.demo.empty.User">
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="REAL_NAME" jdbcType="VARCHAR" property="realName" />
+		<result column="USER_PASSWORD" jdbcType="VARCHAR" property="userPassword" />
+		<result column="LEVEL" jdbcType="INTEGER" property="level" />
+		<result column="SAMBA_SWITCH" jdbcType="INTEGER" property="sambaSwitch" />
+	</resultMap>
+ 
+ 	<sql id="Base_Column_List">
+		USER_ID,
+		USER_NAME,
+		REAL_NAME,
+		USER_PASSWORD,
+		LEVEL,
+		SAMBA_SWITCH
+	</sql>
+ 	
+ 	<sql id="Example_Where_Clause">
+ 		<where>
+			<if test="userName != null and userName != ''">
+ 				AND USER_NAME = #{userName,jdbcType=VARCHAR}
+ 			</if>
+			<if test="realName != null and realName != ''">
+ 				AND REAL_NAME = #{realName,jdbcType=VARCHAR}
+ 			</if>
+			<if test="userId != null">
+ 				AND USER_ID = #{userId,jdbcType=INTEGER}
+ 			</if>
+ 			<if test="level != null">
+ 				AND LEVEL = #{level,jdbcType=INTEGER}
+ 			</if>
+		</where>
+ 	</sql>
+ 	
+ 	<select id="load" resultMap="UserMap" parameterType="java.lang.Integer">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM T_USER
+		WHERE USER_ID = #{userId,jdbcType=INTEGER}
+	</select>
+	
+	
+	<select id="allSelectLists" resultMap="UserMap" parameterType="com.example.demo.empty.User">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM T_USER
+			<include refid="Example_Where_Clause" />
+	</select>
+  
+	<insert id="insert" parameterType="com.example.demo.empty.User">
+ 		INSERT INTO T_USER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+ 				USER_ID,
+ 			</if>
+			<if test="userName != null">
+ 				USER_NAME,
+ 			</if>
+			<if test="realName != null">
+ 				REAL_NAME,
+ 			</if>
+			<if test="userPassword != null">
+ 				USER_PASSWORD,
+ 			</if>
+ 			<if test="level != null">
+ 				LEVEL,
+ 			</if>
+ 			<if test="sambaSwitch != null">
+ 				SAMBA_SWITCH,
+ 			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="userId != null ">
+ 				#{userId,jdbcType=INTEGER},
+ 			</if>
+			<if test="userName != null ">
+ 				#{userName,jdbcType=VARCHAR},
+ 			</if>
+			<if test="realName != null ">
+ 				#{realName,jdbcType=VARCHAR},
+ 			</if>
+			<if test="userPassword != null ">
+ 				#{userPassword,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="level != null">
+ 				#{level,jdbcType=INTEGER},
+ 			</if>
+ 			 <if test="sambaSwitch != null">
+ 				#{sambaSwitch,jdbcType=INTEGER},
+ 			</if>
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.example.demo.empty.User">
+   		UPDATE T_USER
+		<set>
+			<if test="userName != null">
+ 				USER_NAME = #{userName,jdbcType=VARCHAR},
+ 			</if>
+			<if test="realName != null">
+ 				REAL_NAME = #{realName,jdbcType=VARCHAR},
+ 			</if>
+			<if test="userPassword != null  and level != 4">
+ 				USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="level != null">
+ 				LEVEL = #{level,jdbcType=INTEGER},
+ 			</if>
+ 			 <if test="sambaSwitch != null">
+ 				SAMBA_SWITCH = #{sambaSwitch,jdbcType=INTEGER},
+ 			</if>
+		</set>
+		WHERE USER_ID = #{userId,jdbcType=INTEGER}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM T_USER
+		WHERE USER_ID = #{userId,jdbcType=INTEGER}
+	</delete>
+
+</mapper>
+

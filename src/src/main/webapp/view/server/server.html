@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+ <link rel="stylesheet" href="../../source/layui/css/style.css" media="all">
+ <style type="text/css">
+ 	.easyPieChart {
+			    position: relative;
+			    text-align: center;
+			}
+			.easyPieChart canvas {
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			}
+		.chart {
+		padding-left: 8%;
+		    float: left;
+		    margin: 1% 1% 1% 1%;
+		}
+		.percentage,
+		.label {
+			text-align:center;
+		    color: #333;
+		    font-weight: 100;
+		    font-size: 1.2em;
+		    margin-bottom: 0.3em;
+		}
+		.label {
+			margin-top: 20px;
+		}
+		.easyPieChart {
+		    position: relative;
+		    text-align: center;
+		}
+		.easyPieChart canvas {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		}
+ </style>
+</head>
+<body>
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+              <div class="layui-card">
+        	<div class="layui-card-header">
+        		性能监控
+        	</div>
+        	 <div class="layui-card-body" style="height:220px;">
+      	 	    <div>
+                     <div class="chart layui-col-sm2">
+						<div class="percentage" data-percent="50" id="memory"><span id="memoryPersent"></span></div>
+						<div class="label">内存</div>
+					</div>
+					<div class="chart layui-col-sm2">
+						<div class="percentage" data-percent="50" id="disk"><span id="diskPersent"></span></div>
+						<div class="label">磁盘</div>
+					</div>
+					<div class="chart layui-col-sm2">
+						<div class="percentage" data-percent="50" id="cpu"><span id="cpuPersent"></span>%</div>
+						<div class="label">CPU使用率</div>
+					</div>
+					<div class="chart layui-col-sm3">
+						<div id="serverVersion" style="font-weight: 100;font-size: 1.1em; line-height: 38px;">
+						</div>
+					</div>
+                  </div>
+        	 </div>
+         </div>
+        <div class="layui-card" style="margin-top:50px;">
+          <div class="layui-card-header">
+         		<button type="button" id="addKvmServer" class="boot_botton"> 添加计算节点</button>
+				<button type="button" onclick="kvmServerOption(0)"  class="boot_botton" >关机</button>
+                <button type="button"  onclick="kvmServerOption(1)" class="boot_botton" >重启</button>
+      		    <button type="button" onclick="kvmServerOption(2)" class="boot_botton" >刷新</button>
+	          	<button type="button" onclick="deleteKvmServer()"class="boot_botton" > 删除</button>
+                 <button type="button"  onclick="openSsh()" class="boot_botton">查看终端</button>
+                  <button type="button"  onclick="manaDhcp(0)" class="boot_botton">禁用内部DHCP</button>
+                  <button type="button"  onclick="manaDhcp(1)" class="boot_botton">启用内部DHCP</button>
+          </div>
+          <div class="layui-card-body"  id="serverDiv">
+          	<table id="kvmServerGrid" lay-filter="kvmServerGrid"></table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  	<script src="../../source/js/jquery-3.4.1.min.js"></script>
+	<script src="../../layuiadmin/layui/layui.js"></script>  
+	<script src='../../source/js/common.js'></script>
+	<script src="../../source/js/excanvas.js"></script>
+<script src="../../source/js/jquery.easy-pie-chart.js"></script>
+	<script src="server.js"></script>
+</body>
+</html>

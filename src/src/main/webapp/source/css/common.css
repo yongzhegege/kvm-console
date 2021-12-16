@@ -1,0 +1,61 @@
+ body{
+    padding-top: 20px;
+} 
+.pad_lt_22{
+    padding-left: 22px
+}
+.label_100{
+    width:100px;
+}
+.label_110{
+    width:110px;
+}
+.label_120{
+    width:120px;
+}
+.label_130{
+    width:130px;
+}
+.label_140{
+    width:140px;
+}
+.label_150{
+    width:150px;
+}
+.text_center{
+    text-align: center;
+}
+.pad_top_17{
+    padding-top: 17px;
+}
+.float_left{
+    float: left;
+}
+.float_right{
+    float: right;
+}
+.dis_hide{
+	display:none;
+}
+.radio_center{
+    margin-left: 0 !important;
+    text-align: center;
+}
+.layui-table tbody tr:hover,
+.layui-table-hover,
+.layui-table-click,
+.layui-table-mend,
+.layui-table-patch,
+.layui-table-tool,
+.layui-table-total,
+.layui-table-total tr
+{
+    background-color: #C6E7FF !important;
+}
+/* .layui-table tbody tr:nth-child(2n):hover{
+    background-color: #bfece1 !important;
+} */
+.boxone{
+        background-color: #0abff3;
+
+    }

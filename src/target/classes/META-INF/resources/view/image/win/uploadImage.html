@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../source/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../source/css/common.css" media="all">
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <div class="layui-col-md12 text_center">
+            <div class="layui-upload-drag" style="width:300px" id="choseFile">
+                <i class="layui-icon"></i>
+                <p>点击上传，或将文件拖拽到此处</p>
+            </div>
+        </div>
+        <div class="layui-col-md12 text_center" style="margin-top: 20px">
+            <button type="button" id="uploadFile" class="layui-btn layui-btn-normal">
+                <i class="layui-icon layui-icon-upload"></i>上传文件
+            </button>
+        </div>
+          <div class="layui-col-md12 text_center" style="margin-top: 20px;display:none" id="progressDiv">
+        	  <div class="layui-progress layui-progress-big" lay-filter="uploadProgress" lay-showpercent="true">
+			  <div class="layui-progress-bar layui-bg-blue" ></div>
+			</div>
+        </div>
+    </div>
+</div>
+<script src="../../../source/layui/layui.all.js"></script>
+<script src="../../../source/js/common.js"></script>
+<script src="uploadImage.js"></script>
+</body>
+</html>

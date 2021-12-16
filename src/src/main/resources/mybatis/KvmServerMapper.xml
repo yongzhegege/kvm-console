@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.KvmServerDao">
+	<resultMap id="KvmServerMap" type="com.example.demo.empty.KvmServer">
+		<result column="KVM_SERVER_ID" jdbcType="INTEGER" property="kvmServerId" />
+		<result column="KVM_SERVER_NAME" jdbcType="VARCHAR" property="kvmServerName" />
+		<result column="KVM_SERVER_IP" jdbcType="VARCHAR" property="kvmServerIp" />
+		<result column="KVM_SERVER_PASSWORD" jdbcType="VARCHAR" property="kvmServerPassword" />
+		<result column="KVM_SERVER_USER" jdbcType="VARCHAR" property="kvmServerUser" />
+		<result column="VM_NUM" jdbcType="INTEGER" property="vmNum" />
+		<result column="STATE" jdbcType="INTEGER" property="state" />
+		<result column="KVM_SERVER_DESC" jdbcType="VARCHAR" property="kvmServerDesc" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		KVM_SERVER_ID,
+		KVM_SERVER_NAME,
+		KVM_SERVER_IP,
+		KVM_SERVER_PASSWORD,
+		KVM_SERVER_USER,
+		VM_NUM,
+		STATE,
+		KVM_SERVER_DESC,
+		CREATE_TIME
+	</sql>
+	
+	<sql id="Example_Where_Clause">
+		<where>
+		<if test="kvmServerName != null and kvmServerName != ''">
+			AND KVM_SERVER_NAME LIKE CONCAT('%',#{kvmServerName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="kvmServerIp != null and kvmServerIp !=''">
+			AND KVM_SERVER_IP =  #{kvmServerIp,jdbcType=VARCHAR}
+		</if>
+		<if test="kvmServerDesc != null">
+			AND DESC LIKE CONCAT('%',#{kvmServerDesc,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="createTime != null">
+			AND CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+		</if>
+		</where>
+	</sql>
+	
+	<select id="allSelectLists" resultMap="KvmServerMap" parameterType="com.example.demo.empty.KvmServer">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM T_KVM_SERVER
+			<include refid="Example_Where_Clause" />
+	</select>
+	
+	<select id="load" resultType="com.example.demo.empty.KvmServer" parameterType="java.lang.Integer">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM 
+			T_KVM_SERVER
+		WHERE 
+			KVM_SERVER_ID = #{kvmServerId,jdbcType=INTEGER} 
+	</select>
+	
+		<insert id="insert" parameterType="com.example.demo.empty.KvmServer" useGeneratedKeys="true" keyProperty="KVM_SERVER_ID"  keyColumn="kvmServerId">
+		<selectKey keyProperty="kvmServerId" resultType="java.lang.Integer" order="AFTER">
+				<if test="kvmServerId == null">
+					SELECT LAST_INSERT_ROWID() AS kvmServerId
+				</if>
+				<if test="kvmServerId != null">
+					SELECT #{kvmServerId,jdbcType=BIGINT} AS kvmServerId
+				</if>
+		</selectKey>
+		INSERT INTO T_KVM_SERVER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="kvmServerId != null">
+				KVM_SERVER_ID,
+			</if>
+			<if test="kvmServerName != null">
+				KVM_SERVER_NAME,
+			</if>
+			<if test="kvmServerIp != null">
+				KVM_SERVER_IP,
+			</if>
+			<if test="kvmServerPassword != null">
+				KVM_SERVER_PASSWORD,
+			</if>
+			<if test="kvmServerUser != null">
+				KVM_SERVER_USER,
+			</if>
+			<if test="kvmServerDesc!= null">
+				KVM_SERVER_DESC,
+			</if>
+			<if test="state!= null">
+				STATE,
+			</if>
+			<if test="vmNum!= null">
+				VM_NUM,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="kvmServerId != null">
+				#{kvmServerId,jdbcType=INTEGER},
+			</if>
+			<if test="kvmServerName != null">
+				#{kvmServerName,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerIp != null">
+				#{kvmServerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerPassword != null">
+				#{kvmServerPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerUser != null">
+				#{kvmServerUser,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerDesc != null">
+				#{kvmServerDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="state!= null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="vmNum!= null">
+				#{vmNum,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null ">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.example.demo.empty.KvmServer">
+		UPDATE
+			 T_KVM_SERVER
+		<set>
+			<if test="kvmServerId != null">
+				KVM_SERVER_ID = #{kvmServerId,jdbcType=INTEGER},
+			</if>
+			<if test="kvmServerName != null">
+				KVM_SERVER_NAME = #{kvmServerName,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerIp != null">
+				KVM_SERVER_IP = #{kvmServerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerPassword != null">
+				KVM_SERVER_PASSWORD = #{kvmServerPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerUser != null">
+				KVM_SERVER_USER = #{kvmServerUser,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerDesc != null">
+				KVM_SERVER_DESC = #{kvmServerDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="state!= null">
+				STATE = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="vmNum!= null">
+				VM_NUM = #{vmNum,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null ">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		WHERE KVM_SERVER_ID = #{kvmServerId,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE 
+			FROM T_KVM_SERVER
+		WHERE 
+			KVM_SERVER_ID  =  #{kvmServerId,jdbcType = INTEGER}
+	</delete>
+	
+	
+</mapper>
