@@ -7,7 +7,7 @@
  VNC：novnc
  
  
- 安装方法：install.sh  
+ 安装方法：解压根目录下kvm.tar.gz至/opt/目录中，执行/opt/kvm/install.script脚本 
  连网状态下自动完成需要的组件安装
 
  
