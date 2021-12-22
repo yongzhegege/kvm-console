@@ -16,7 +16,7 @@
  ![](http://www.hylix.net/media/16395559449920/16395564343676.png)
  
  默认登陆帐号密码： admin  123456
- ![](http://www.hylix.net/media/16395559449920/16395564770186.png)
+![](http://www.hylix.net/media/16395559449920/16395564770186.png)
  
 创建
 ![](http://www.hylix.net/media/16395559449920/16395565780571.png)
