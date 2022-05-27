@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.VmDao">
+	<resultMap id="VmMap" type="com.example.demo.empty.Vm">
+		<result column="VM_ID" jdbcType="INTEGER" property="vmId" />
+		<result column="VM_NAME" jdbcType="VARCHAR" property="vmName" />
+		<result column="VM_SHOW_NAME" jdbcType="VARCHAR" property="vmShowName" />
+		<result column="VM_DESC" jdbcType="VARCHAR" property="vmDesc" />
+		<result column="VM_IP" jdbcType="VARCHAR" property="vmIp" />
+		<result column="VM_MAC" jdbcType="VARCHAR" property="vmMac" />
+		<result column="VM_STATE" jdbcType="INTEGER" property="vmState" />
+		<result column="VNC_PORT" jdbcType="INTEGER" property="vncPort" />
+		<result column="KVM_SERVER_ID" jdbcType="INTEGER" property="kvmServerId" />
+		<result column="VM_ISO" jdbcType="VARCHAR" property="vmIso" />
+		<result column="VM_DRIVER" jdbcType="VARCHAR" property="vmDriver" />
+		<result column="VM_NETWORK" jdbcType="VARCHAR" property="vmNetwork" />
+		<result column="VM_MEMORY" jdbcType="INTEGER" property="vmMemory" />
+		<result column="VM_CPU" jdbcType="INTEGER" property="vmCpu" />
+		<result column="VM_DISK" jdbcType="INTEGER" property="vmDisk" />
+		<result column="VM_UUID" jdbcType="VARCHAR" property="vmUuid" />
+		<result column="VM_DEFAULT_START" jdbcType="VARCHAR" property="vmDefaultStart"/>
+		<result column="VM_RECYCLE" jdbcType="INTEGER" property="vmRecycle"/>
+		<result column="VM_TYPE" jdbcType="VARCHAR" property="vmType"/>
+		<result column="COMPUTER_ACCOUNT" jdbcType="VARCHAR" property="computerAccount" />
+		<result column="COMPUTER_PASSWORD" jdbcType="VARCHAR" property="computerPassword" />
+		<result column="COMPUTER_DOMAIN_NAME" jdbcType="VARCHAR" property="computerDomainName" />
+		<result column="COMPUTER_PORT" jdbcType="VARCHAR" property="computerPort" />
+		<result column="ACCOUNT_TYPE" jdbcType="INTEGER" property="accountType" />
+		<result column="VM_UP" jdbcType="INTEGER" property="vmUp" />
+		<result column="VM_DOWN" jdbcType="INTEGER" property="vmDown" />
+		<result column="VM_DISK_MODE" jdbcType="INTEGER" property="vmDiskMode" />
+	</resultMap>
+	
+	<sql id="Vm_Search_List">
+			V.VM_ID,
+			V.VM_NAME,
+			V.VM_SHOW_NAME,
+			V.VM_DESC,
+			V.VM_IP,
+			V.VM_MAC,
+			V.VM_STATE,
+			V.KVM_SERVER_ID,
+			V.VNC_PORT,
+			V.VM_ISO,
+			V.VM_DRIVER,
+			V.VM_NETWORK,
+			V.VM_MEMORY,
+			V.VM_CPU,
+			V.VM_DISK,
+			V.VM_UUID,
+			V.VM_DEFAULT_START,
+			VM_RECYCLE,
+			VM_TYPE,
+			V.COMPUTER_ACCOUNT,
+			V.COMPUTER_PASSWORD,
+			V.COMPUTER_DOMAIN_NAME,
+			V.COMPUTER_PORT,
+			V.ACCOUNT_TYPE,
+			V.VM_UP,
+			V.VM_DOWN,
+			V.VM_DISK_MODE
+	</sql>
+	
+	<sql id="Example_Where_Clause">
+		<where>
+			<if test="kvmServerId != null">
+				V.KVM_SERVER_ID = #{kvmServerId,jdbcType=INTEGER}
+			</if>
+			<if test="vmRecycle != null">
+				V.VM_RECYCLE = #{vmRecycle,jdbcType=INTEGER}
+			</if>
+		</where>
+	</sql>
+	
+		<select id="allSelectLists" resultMap="VmMap" parameterType="com.example.demo.empty.Vm">
+		SELECT
+			<include refid="Vm_Search_List" />
+		FROM T_VM AS V
+			<include refid="Example_Where_Clause" />
+	</select>
+	
+	
+		<insert id="insert" parameterType="com.example.demo.empty.Vm">
+		INSERT INTO T_VM
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vmName != null">
+				VM_NAME,
+			</if>
+			<if test="vmShowName != null">
+				VM_SHOW_NAME,
+			</if>
+			<if test="vmDesc != null">
+				VM_DESC,
+			</if>
+			<if test="vmIp != null">
+				VM_IP,
+			</if>
+			<if test="vmMac!= null">
+				VM_MAC,
+			</if>
+			<if test="vmState!= null">
+				VM_STATE,
+			</if>
+			<if test="vncPort!= null">
+				VNC_PORT,
+			</if>
+			<if test="vmIso != null">
+				VM_ISO,
+			</if>
+			<if test="vmDriver != null">
+				VM_DRIVER,
+			</if>
+			<if test="vmNetwork != null">
+				VM_NETWORK,
+			</if>
+			<if test="vmMemory != null">
+				VM_MEMORY,
+			</if>
+			<if test="vmCpu != null">
+				VM_CPU,
+			</if>
+			<if test="vmDisk!= null">
+				VM_DISK,
+			</if>
+			<if test="vmUuid != null">
+				VM_UUID,
+			</if>
+			<if test="kvmServerId != null">
+				KVM_SERVER_ID,
+			</if>
+			<if test="vmDefaultStart !=null">
+				VM_DEFAULT_START,
+			</if>
+			<if test="vmRecycle != null">
+				VM_RECYCLE,
+			</if>
+			<if test="vmType != null">
+				VM_TYPE,
+			</if>
+			<if test="computerAccount != null">
+				COMPUTER_ACCOUNT,
+			</if>
+			<if test="computerPassword != null">
+				COMPUTER_PASSWORD,
+			</if>
+			<if test="computerDomainName != null">
+				COMPUTER_DOMAIN_NAME,
+			</if>
+			<if test="computerPort != null">
+				COMPUTER_PORT,
+			</if>
+			<if test="accountType != null">
+				ACCOUNT_TYPE,
+			</if>
+			<if test="vmUp != null">
+				VM_UP,
+			</if>
+			<if test="vmDown != null">
+				VM_DOWN,
+			</if>
+			<if test="vmDiskMode != null">
+				VM_DISK_MODE,
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="vmName != null">
+				#{vmName,jdbcType=VARCHAR},
+			</if>
+			<if test="vmShowName != null">
+				#{vmShowName,jdbcType=VARCHAR},
+			</if>
+			<if test="vmDesc != null">
+				#{vmDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="vmIp != null">
+				#{vmIp,jdbcType=VARCHAR},
+			</if>
+			<if test="vmMac!= null">
+				#{vmMac,jdbcType=VARCHAR},
+			</if>
+			<if test="vmState!= null">
+				#{vmState,jdbcType=INTEGER},
+			</if>
+			<if test="vncPort!= null">
+				#{vncPort,jdbcType=INTEGER},
+			</if>
+			<if test="vmIso != null">
+				#{vmIso,jdbcType=VARCHAR},
+			</if>
+			<if test="vmDriver != null">
+				#{vmDriver,jdbcType=VARCHAR},
+			</if>
+			<if test="vmNetwork != null">
+				#{vmNetwork,jdbcType=VARCHAR},
+			</if>
+			<if test="vmMemory != null">
+				#{vmMemory,jdbcType=INTEGER},
+			</if>
+			<if test="vmCpu != null">
+				#{vmCpu,jdbcType=INTEGER},
+			</if>
+			<if test="vmDisk!= null">
+				#{vmDisk,jdbcType=INTEGER},
+			</if>
+			<if test="vmUuid != null">
+				#{vmUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerId != null">
+				#{kvmServerId,jdbcType=INTEGER},
+			</if>
+			<if test="vmDefaultStart !=null">
+				#{vmDefaultStart,jdbcType=VARCHAR},
+			</if>
+			<if test="vmRecycle != null">
+				#{vmRecycle,jdbcType=INTEGER},
+			</if>
+			<if test="vmType != null">
+				#{vmType,jdbcType=VARCHAR},
+			</if>
+			<if test="computerAccount != null">
+				#{computerAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="computerPassword != null">
+				#{computerPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="computerDomainName != null">
+				#{computerDomainName,jdbcType=VARCHAR},
+			</if>
+			<if test="computerPort != null">
+				#{computerPort,jdbcType=VARCHAR},
+			</if>
+			<if test="accountType != null">
+				#{accountType,jdbcType=INTEGER},
+			</if>
+			<if test="vmUp != null">
+				#{vmUp,jdbcType=INTEGER},
+			</if>
+			<if test="vmDown != null">
+				#{vmDown,jdbcType=INTEGER},
+			</if>
+			<if test="vmDiskMode != null">
+				#{vmDiskMode,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	
+	<select id="load" parameterType="java.lang.Integer" resultType="com.example.demo.empty.Vm">
+	SELECT
+		<include refid="Vm_Search_List" />
+	 FROM 
+	 	T_VM AS V
+	 WHERE V.VM_ID = #{vmid,jdbcType=INTEGER}
+	</select>
+	
+	<select id="max" resultType="java.lang.Integer">
+	SELECT
+		MAX(VNC_PORT) 
+	AS 
+		VNC_PORT
+	 FROM 
+	 	T_VM
+	</select>
+	
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM T_VM
+		WHERE VM_ID = #{vmId,jdbcType=INTEGER}
+	</delete>
+	
+	<delete id="deleteByKvmServerId" parameterType="java.lang.Integer">
+		DELETE FROM T_VM
+		WHERE KVM_SERVER_ID = #{kvmServerId,jdbcType=INTEGER}
+	</delete>
+	
+	
+	<update id="update" parameterType="com.example.demo.empty.Vm">
+		UPDATE 
+			T_VM 
+		<set>
+			<if test="vmName != null">
+				VM_NAME = #{vmName,jdbcType=VARCHAR},
+			</if>
+			<if test="vmShowName != null">
+				VM_SHOW_NAME = #{vmShowName,jdbcType=VARCHAR},
+			</if>
+			<if test="vmDesc != null">
+				VM_DESC = #{vmDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="vmIp != null">
+				VM_IP = #{vmIp,jdbcType=VARCHAR},
+			</if>
+			<if test="vmMac!= null">
+				VM_MAC = #{vmMac,jdbcType=VARCHAR},
+			</if>
+			<if test="vmState!= null">
+				VM_STATE = #{vmState,jdbcType=INTEGER},
+			</if>
+			<if test="vncPort!= null">
+				VNC_PORT = #{vncPort,jdbcType=INTEGER},
+			</if>
+			<if test="vmIso != null">
+				VM_ISO = #{vmIso,jdbcType=VARCHAR},
+			</if>
+			<if test="vmDriver != null">
+				VM_DRIVER = #{vmDriver,jdbcType=VARCHAR},
+			</if>
+			<if test="vmNetwork != null">
+				VM_NETWORK = #{vmNetwork,jdbcType=VARCHAR},
+			</if>
+			<if test="vmMemory != null">
+				VM_MEMORY = #{vmMemory,jdbcType=INTEGER},
+			</if>
+			<if test="vmCpu != null">
+				VM_CPU = #{vmCpu,jdbcType=INTEGER},
+			</if>
+			<if test="vmDisk!= null">
+				VM_DISK = #{vmDisk,jdbcType=INTEGER},
+			</if>
+			<if test="vmUuid != null">
+				VM_UUID = #{vmUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="kvmServerId != null">
+				KVM_SERVER_ID = #{kvmServerId,jdbcType=INTEGER},
+			</if>
+			<if test="vmDefaultStart !=null">
+				VM_DEFAULT_START = #{vmDefaultStart,jdbcType=VARCHAR},
+			</if>
+			<if test="vmRecycle != null">
+				VM_RECYCLE = #{vmRecycle,jdbcType=INTEGER},
+			</if>
+			<if test="computerAccount != null">
+				COMPUTER_ACCOUNT = #{computerAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="computerPassword != null">
+				COMPUTER_PASSWORD = #{computerPassword,jdbcType=VARCHAR},
+			</if>
+			<if test="computerDomainName != null">
+				COMPUTER_DOMAIN_NAME = #{computerDomainName,jdbcType=VARCHAR},
+			</if>
+			<if test="computerPort != null">
+				COMPUTER_PORT = #{computerPort,jdbcType=VARCHAR},
+			</if>
+			<if test="accountType != null">
+				ACCOUNT_TYPE = #{accountType,jdbcType=INTEGER},
+			</if>
+			<if test="vmUp != null">
+				VM_UP = #{vmUp,jdbcType=INTEGER},
+			</if>
+			<if test="vmDown != null">
+				VM_DOWN = #{vmDown,jdbcType=INTEGER},
+			</if>
+			<if test="vmDiskMode != null">
+				VM_DISK_MODE = #{vmDiskMode,jdbcType=INTEGER},
+			</if>
+		</set>
+		WHERE VM_ID = #{vmId,jdbcType=INTEGER}
+	</update>
+	
+	<select id="getMaxVncPort" resultType="java.lang.Integer">
+		SELECT
+			MAX(VNC_PORT) 
+		AS 
+			VNC_PORT
+		 FROM 
+		 	T_VM
+	</select>
+	
+</mapper>

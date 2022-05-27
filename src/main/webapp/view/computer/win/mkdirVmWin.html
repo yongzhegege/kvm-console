@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../../source/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../source/layui/css/style.css" media="all">
+    <link rel="stylesheet" href="../../../source/css/common.css" media="all">
+</head>
+<body>
+<div class="layui-fluid" style="margin-top:20px">
+    <div class="layui-row">
+        <div class="layui-col-md12">
+			    	<div class="layui-row">
+			    	<div id="computerFormDiv">
+			    	<form class="layui-form" id="vmForm" lay-filter="vmfilter">
+			    	 	<div class="layui-form-item">
+			    	 		<input type="hidden" name="vmId" id="vmId" />
+			    			<div class="layui-inline">
+		                        <label class="layui-form-label" style="width:91px;"><span style="color: red;">*</span>服务器：</label>
+		                        <div class="layui-input-inline">
+		                        	<select name="kvmServerId" id="kvmServer" lay-verify="required" lay-filter="kvmServer">
+ 									</select>
+		                        </div>
+		                    </div>
+		                	<div class="layui-inline">
+		                        <label class="layui-form-label" style="width:91px;"><span style="color: red;">*</span>虚拟机名：</label>
+		                        <div class="layui-input-inline">
+		                            <input type="text" name="vmName" id="vmName"  maxlength="25" autocomplete="off" class="layui-input" lay-verify="required|lengthCheck25|domainChinese" placeholder="请输入虚拟机名">
+		                        </div>
+		                    </div>
+		                   </div>
+		                   <div class="layui-form-item">
+		                    <div class="layui-inline">
+		                        <label class="layui-form-label" for="vmIso"><span style="color: red;">*</span>镜像文件：</label>
+		                        <div class="layui-input-inline">
+ 									<select name="vmIso" id="vmIso" lay-verify="required" lay-filter="vmIso">
+ 									</select>
+		                        </div>
+		                    </div>
+		                    <div class="layui-inline">
+		                        <label class="layui-form-label" style="width:91px;"><span style="color: red;">*</span>驱动：</label>
+		                        <div class="layui-input-inline">
+ 									<select name="vmDriver" id="vmDriver" lay-verify="required" lay-filter="vmDriver">
+ 									</select>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="layui-form-item">
+		                	 <div class="layui-inline">
+		                        <label class="layui-form-label" for="computerNetmask"><span style="color: red;">*</span>网络连接：</label>
+		                        <div class="layui-input-inline">
+ 									<select name="vmNetwork" id="vmNetwork" lay-verify="required"  lay-filter="vmNetwork">
+ 									</select>
+		                        </div>
+		                    </div>
+		                    <div class="layui-inline">
+		                        <label class="layui-form-label" style="width:91px;"><span style="color: red;">*</span>内存(GB)：</label>
+		                        <div class="layui-input-inline">
+		                            <input type="text" name="vmMemory" id="vmMemory" lay-verify="positiveNum"   autocomplete="off" class="layui-input" value="2">
+		                        </div>
+		                        <label class="layui-form-label" id="memoryMax" style="width: 40px;padding-left: 0px;color: red;"></label>
+		                    </div>
+		                </div>
+		                <div class="layui-form-item">
+		                	<div class="layui-inline">
+		                        <label class="layui-form-label" for="vmDisk"><span style="color: red;">*</span>硬盘(GB)：</label>
+		                        <div class="layui-input-inline">
+		                            <input type="text" name="vmDisk" id="vmDisk" lay-verify="positiveNum"  autocomplete="off" class="layui-input" value="50" >
+		                        </div>
+		                    </div>
+		                    <div class="layui-inline">
+		                        <label class="layui-form-label" for="vmCpu" style="width:91px;"><span style="color: red;">*</span>CPU：</label>
+		                        <div class="layui-input-inline">
+		                             <input type="text" name="vmCpu" id="vmCpu" autocomplete="off" lay-verify="positiveNum"  class="layui-input" value="1">
+		                        </div>
+		                        <label class="layui-form-label" id="cpuMax" style="width: 40px;padding-left: 0px;color: red;"></label>
+		                    </div>
+		                </div>
+		                <div class="layui-form-item">
+		                	<div class="layui-inline">
+		                		<label class="layui-form-label" for="vmDefaultStart" ><span style="color: red;">*</span>默认启动：</label>	
+		                		<div class="layui-input-inline">
+			                		<select name="vmDefaultStart" id="vmDefaultStart">
+			                			<option value="cdrom">光驱引导</option>
+			                			<option value="hd">硬盘引导</option>
+			                			<option value="network">网络引导</option>
+			                		</select>
+		                		</div>
+		                	</div>
+		                	<div class="layui-inline" id="vmTypeDiv">
+		                		<label class="layui-form-label" for="vmDefaultStart" ><span style="color: red;">*</span>固件类型：</label>	
+		                		<div class="layui-input-inline" id="vmTypeInput">
+			                		<select name="vmType" id="vmType">
+			                		</select>
+		                		</div>
+		                	</div>
+		                </div>
+		                <div class="layui-form-item" id="vmTypeDiv">
+                			 <div class="layui-inline">
+		                        <label class="layui-form-label"   style="width:91px;"><span style="color: red;">*</span>硬盘模式：</label>
+		                        <div class="layui-input-inline">
+		                             <select name="vmDiskMode" id="vmDiskMode">
+			                			<option value="0">virtio-scsi</option>
+			                			<option value="1">virtio</option>
+			                		</select>
+		                        </div>
+		                    </div>
+                			 <div class="layui-inline">
+		                        <label class="layui-form-label"   style="width:91px;"><span style="color: red;">*</span>架构：</label>
+		                        <div class="layui-input-inline">
+		                             <input type="text" name="kvmServerType" id="kvmServerType" disabled="disabled" class="layui-input">
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="layui-form-item">
+		                    <div class="text_center" style="margin-top: 25px">
+		                        <button type="button" lay-submit lay-filter="formfilter" id="save" class="boot_botton">
+		                            提交
+		                        </button>
+		                    </div>
+		                </div>
+		            </form>
+			    </div>
+			  </div>
+        </div>
+    </div>
+</div>
+<script src="../../../source/layui/layui.all.js"></script>
+<script src='../../../source/js/common.js'></script>
+<script src="../../../source/js/valid.js"></script>
+<script src="mkdirVmWinFun.js"></script>
+</body>
+</html>
