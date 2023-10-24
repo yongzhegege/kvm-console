@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="../../../source/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="../../../source/layui/css/style.css" media="all">
+<link rel="stylesheet" href="../../../source/css/common.css" media="all">
+<style>
+	    div [name="test"]{
+    	width:70px !important
+       }
+</style>
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row">
+			<div class="layui-col-md12">
+				<form class="layui-form" lay-filter="vmfilter">
+						<input  type="hidden" name="vmId" id="vmId"/>
+						<input  type="hidden" name="vmState" id="vmState"/>
+						<div class="layui-form-item">
+		                    <div class="layui-inline" id="vmSpeedDiv">
+		                		<label class="layui-form-label" for="vmDefaultStart" >限速(KB)：</label>
+	                				<div class="layui-input-inline" name="test">
+			                            <input type="text" name="vmUp" id="vmUp" maxlength="25" autocomplete="off" class="layui-input"  lay-verify= "required|num"> 
+			                        </div>
+			                        <div class="layui-form-mid"><img alt="" src="../../../../source/image/menuIcon/upload.png"></div>
+			                        <div class="layui-input-inline" name ="test">
+			                            <input type="text" name="vmDown" id="vmDown"    maxlength="25" autocomplete="off" class="layui-input"  lay-verify= "required|num"> 
+			                        </div>
+			                        <div class="layui-form-mid"><img alt="" src="../../../../source/image/menuIcon/download.png"></div>
+			                        	<button type="button" lay-submit lay-filter="formfilter" id="submit"  class="boot_botton">确定</button>
+		                	</div>
+		                </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="../../../source/layui/layui.all.js"></script>
+	<script src="../../../source/js/common.js"></script>
+	<script src="vmUpDown.js"></script>
+</body>
+</html>

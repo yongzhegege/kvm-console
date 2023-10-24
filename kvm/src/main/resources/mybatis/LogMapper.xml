@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.LogDao">
+	<resultMap id="LogMap" type="com.example.demo.empty.Log">
+		<result column="LOG_ID" jdbcType="INTEGER" property="logId" />
+		<result column="USERNAME" jdbcType="VARCHAR" property="userName" />
+		<result column="CONTENT" jdbcType="VARCHAR" property="content" />
+		<result column="RESULT" jdbcType="INTEGER" property="result" />
+		<result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+		<result column="HOST_IP" jdbcType="VARCHAR" property="hostIp" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		LOG_ID,
+		USERNAME,
+		CONTENT,
+		RESULT,
+		CREATE_TIME,
+		HOST_IP
+	</sql>
+	
+	<sql id="Example_Where_Clause">
+		<where>
+			<if test="logId != null">
+					LOG_ID = #{logId,jdbcType=INTEGER}
+			</if>
+			<if test="userName != null">
+					USERNAME = #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null">
+					CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="result != null">
+					RESULT = #{result,jdbcType=INTEGER}
+			</if>
+			<if test="createTime != null">
+					CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+			</if>
+			<if test="searchInfo != null and searchInfo != ''">
+					USERNAME LIKE '%' || #{searchInfo,jdbcType=VARCHAR} || '%'
+					OR
+					CONTENT LIKE '%' || #{searchInfo,jdbcType=VARCHAR} || '%'
+					OR
+					CREATE_TIME  LIKE '%' || #{searchInfo,jdbcType=VARCHAR} || '%'
+					OR
+					HOST_IP LIKE '%' || #{searchInfo,jdbcType=VARCHAR} || '%'
+ 			</if>
+		</where>
+	</sql>
+	
+	
+		<select id="allSelectLists" resultMap="LogMap" parameterType="com.example.demo.empty.Log">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM T_LOG
+			<include refid="Example_Where_Clause" />
+		ORDER BY LOG_ID DESC
+	</select>
+	
+	<insert id="insert" parameterType="com.example.demo.empty.Log">
+		INSERT INTO T_LOG
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="logId != null">
+						LOG_ID,
+				</if>
+				<if test="userName != null">
+						USERNAME,
+				</if>
+				<if test="content != null">
+						CONTENT,
+				</if>
+				<if test="result != null">
+						RESULT,
+				</if>
+				<if test="createTime != null">
+						CREATE_TIME,
+				</if>
+				<if test="hostIp != null">
+						HOST_IP,
+				</if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+				<if test="logId != null">
+						#{logId,jdbcType=INTEGER},
+				</if>
+				<if test="userName != null">
+						#{userName,jdbcType=VARCHAR},
+				</if>
+				<if test="content != null">
+						#{content,jdbcType=VARCHAR},
+				</if>
+				<if test="result != null">
+						#{result,jdbcType=INTEGER},
+				</if>
+				<if test="createTime != null">
+						#{createTime,jdbcType=VARCHAR},
+				</if>
+				<if test="hostIp != null">
+						#{hostIp,jdbcType=VARCHAR},
+				</if>
+			</trim>
+	</insert>
+	
+	<delete id="delete" parameterType="com.example.demo.empty.Log">
+		DELETE 
+				FROM 
+		T_LOG
+		<include refid="Example_Where_Clause" />
+	</delete>
+	
+	
+</mapper>

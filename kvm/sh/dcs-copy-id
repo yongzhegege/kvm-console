@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+set ip [lindex $argv 0]
+set user [lindex $argv 1]
+set passwd [lindex $argv 2]
+spawn ssh-copy-id $user@$ip
+expect {    
+     "*yes/no*" {        
+             send "yes\n";        
+             exp_continue;    
+                }    
+     "password:" {        
+             send "$passwd\n";        
+             exp_continue;    
+             }
+       }

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>desktop</title>
+      <link rel="stylesheet" href="../../../layuiadmin/layui/css/layui.css" media="all">
+
+    <style type="text/css">
+   div {
+    	margin: 0px auto;
+    }
+    .ant-message{
+    	box-sizing:border-box;
+    	margin:0;
+    	padding:0;
+    	color:rgba(0,0,0,.85);
+    	font-size:14px;
+    	font-variant:tabular-nums;
+    	line-height:1.5715;
+    	list-style:none;
+    	font-feature-settings:"tnum","tnum";
+    	position:fixed;
+    	top:8px;left:0;
+    	z-index:1010;
+    	width:100%;
+    	pointer-events:none
+    	}
+    	.ant-message-notice{padding:8px;text-align:center}
+    	.ant-message-notice-content{display:inline-block;padding:10px 16px;background:#fff;border-radius:2px;box-shadow:0 3px 6px -4px rgba(0,0,0,.12),0 6px 16px 0 rgba(0,0,0,.08),0 9px 28px 8px rgba(0,0,0,.05);pointer-events:all}
+	    .ant-btn-icon-only {
+		    width: 32px;
+		    height: 32px;
+		    padding: 2.4px 0;
+		    font-size: 16px;
+		    vertical-align: -3px;
+		    cursor: pointer;
+		}
+		.ant-btn-icon-only>.anticon {
+    display: flex;
+    justify-content: center;
+}
+.ant-dropdown {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: "tnum","tnum";
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    z-index: 1050;
+    display: block;
+}
+.ant-dropdown-menu {
+    position: relative;
+    margin: 0;
+    padding: 4px 0;
+    text-align: left;
+    list-style-type: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: 0 3px 6px -4px rgba(0,0,0,.12),0 6px 16px 0 rgba(0,0,0,.08),0 9px 28px 8px rgba(0,0,0,.05);
+}
+.ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title {
+    clear: both;
+    margin: 0;
+    padding: 5px 12px;
+    color: rgba(0,0,0,.85);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all .3s;
+}
+.ant-dropdown-menu-item:hover {
+	background-color: #f5f5f5;
+}
+    </style>
+</head>
+
+<body style="background-color: #8c8c8c">
+<div id="display" style="position: absolute; overflow: hidden;margin: 0 auto;left:0px;top:0px;">
+</div>
+<div>
+		<div class="ant-message" id="message" style="display:none">
+			<div class="ant-message-notice">
+				<div class="ant-message-notice-content">
+					<div class="ant-message-custom-content ant-message-loading">
+					<span role="img" aria-label="loading" class="anticon anticon-loading anticon-spin">
+					<svg viewBox="0 0 1024 1024" focusable="false" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+					<path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z">
+					</path>
+					</svg>
+					</span>
+					<span>正在等待服务器响应...</span>
+					</div>
+				</div>
+			</div>
+	</div>
+	<div full="0" id="full" style="position: absolute; top: 50px; right: 50px; transform: translate(0px, 0px);"><div class=""><button type="button" class="ant-btn ant-btn-icon-only"><span role="img" aria-label="expand" class="anticon anticon-expand"><svg viewBox="64 64 896 896" focusable="false" data-icon="expand" width="1em" height="1em" fill="currentColor" aria-hidden="true"><defs><style></style></defs><path d="M342 88H120c-17.7 0-32 14.3-32 32v224c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16V168h174c8.8 0 16-7.2 16-16v-48c0-8.8-7.2-16-16-16zm578 576h-48c-8.8 0-16 7.2-16 16v176H682c-8.8 0-16 7.2-16 16v48c0 8.8 7.2 16 16 16h222c17.7 0 32-14.3 32-32V680c0-8.8-7.2-16-16-16zM342 856H168V680c0-8.8-7.2-16-16-16h-48c-8.8 0-16 7.2-16 16v224c0 17.7 14.3 32 32 32h222c8.8 0 16-7.2 16-16v-48c0-8.8-7.2-16-16-16zM904 88H682c-8.8 0-16 7.2-16 16v48c0 8.8 7.2 16 16 16h174v176c0 8.8 7.2 16 16 16h48c8.8 0 16-7.2 16-16V120c0-17.7-14.3-32-32-32z"></path></svg></span></button></div></div>
+	<div id="copyText"  class="react-draggable" style="position: absolute; top: 50px; right: 100px; transform: translate(0px, 0px);"><div class=""><button type="button" class="ant-btn ant-btn-icon-only"><span role="img" aria-label="copy" class="anticon anticon-copy"><svg viewBox="64 64 896 896" focusable="false" data-icon="copy" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"></path></svg></span></button></div></div>
+	<div  id="shortcutKey" class="react-draggable" style="position: absolute; top: 100px; right: 100px; transform: translate(0px, 0px);"><div class=""><button type="button" class="ant-btn ant-btn-icon-only ant-dropdown-trigger"><span role="img" aria-label="windows" class="anticon anticon-windows"><svg viewBox="64 64 896 896" focusable="false" data-icon="windows" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M120.1 770.6L443 823.2V543.8H120.1v226.8zm63.4-163.5h196.2v141.6l-196.2-31.9V607.1zm340.3 226.5l382 62.2v-352h-382v289.8zm63.4-226.5h255.3v214.4l-255.3-41.6V607.1zm-63.4-415.7v288.8h382V128.1l-382 63.3zm318.7 225.5H587.3V245l255.3-42.3v214.2zm-722.4 63.3H443V201.9l-322.9 53.5v224.8zM183.5 309l196.2-32.5v140.4H183.5V309z"></path></svg></span></button></div></div>
+	<div id="shortcutKeyDiv"  class="ant-dropdown ant-dropdown-placement-bottomRight " style="min-width: 32px; top: 136px;display:none">
+		<ul class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light" role="menu" tabindex="0" data-menu-list="true">
+		<li class="ant-dropdown-menu-item" role="menuitem" tabindex="-1" data-menu-id="rc-menu-uuid-94581-1-tmp_key-0">
+		<span class="ant-dropdown-menu-title-content" sendType="0">Ctrl+Alt+Delete</span>
+		</li>
+		<li class="ant-dropdown-menu-item" role="menuitem" tabindex="-1" data-menu-id="rc-menu-uuid-94581-1-tmp_key-1">
+		<span class="ant-dropdown-menu-title-content" sendType="1">Ctrl+Alt+Backspace</span>
+		</li>
+		<li class="ant-dropdown-menu-item" role="menuitem" tabindex="-1" data-menu-id="rc-menu-uuid-94581-1-tmp_key-2">
+		<span class="ant-dropdown-menu-title-content" sendType="2">Windows+D</span>
+		</li>
+		<li class="ant-dropdown-menu-item"  role="menuitem" tabindex="-1" data-menu-id="rc-menu-uuid-94581-1-tmp_key-3">
+		<span class="ant-dropdown-menu-title-content" sendType="3">Windows+E</span>
+		</li>
+		<li class="ant-dropdown-menu-item"  role="menuitem" tabindex="-1" data-menu-id="rc-menu-uuid-94581-1-tmp_key-4">
+		<span class="ant-dropdown-menu-title-content" sendType="4">Windows+R</span>
+		</li>
+		<li class="ant-dropdown-menu-item" role="menuitem" tabindex="-1" data-menu-id="rc-menu-uuid-94581-1-tmp_key-5">
+		<span class="ant-dropdown-menu-title-content" sendType="5">Windows+X</span>
+		</li>
+		<li class="ant-dropdown-menu-item" role="menuitem" tabindex="-1" data-menu-id="rc-menu-uuid-94581-1-tmp_key-6">
+		<span class="ant-dropdown-menu-title-content" sendType="6">Windows</span>
+		</li>
+		</ul>
+		</div>
+</div>
+
+<script src="../../../layuiadmin/layui/layui.js"></script>  
+<script src='../../../source/js/common.js'></script>
+<script type="text/javascript" src="../../../source/guacamole-common-js/all.min.js"></script>
+<script type="text/javascript">
+var $ = layui.jquery;
+var pw = window.opener;
+var userVmId = pw.userVmId;
+var guac = null;
+var width = 0;
+var height = 0;
+var keyboard = null;
+var innerWidth = window.innerWidth;
+var innerHeight = window.innerHeight;
+var screenWidth = window.screen.width;
+var screenHeight = window.screen.height;
+
+$("#shortcutKeyDiv").css("left",innerWidth - 246 + "px");
+
+if(userVmId != 0){
+	reConnect(0);
+}else{
+	Dialog.alert("请从用户桌面跳转！",function (){
+		window.close();
+	})
+}
+
+//初始化连接
+function reConnect(full){
+	$("#message").css("display","block");
+	if(full == 0){
+		width = innerWidth;
+		height = innerHeight;
+	}else{
+		width = screenWidth;
+		height = screenHeight;
+	}
+	$("#display").css("width",width);
+	$("#display").css("height",height);
+	 guac = new Guacamole.Client(
+		     new Guacamole.WebSocketTunnel("ws://"+window.location.hostname+":"+window.location.port+"/webSocket?width="+width+"&height="+height+"&userVmId="+userVmId+"&")
+		 ); 
+	 $("#display").empty();
+	 $("#display").append(guac.getDisplay().getElement());
+	guac.onerror = function(error) {
+		if(error.code == 521){
+			layer.confirm('连接已断开，是否关闭当前页面？', {
+				btn: ['确定', '取消'],
+				closeBtn: 0,
+				icon: 3,
+				btnAlign: 'c',
+				title: '操作确认'
+			},function() {
+				window.close();
+			})
+		}else if(error.code == 519){
+			Dialog.alert("连接超时，请检查连接参数是否正确！",function (){
+				window.close();
+			})
+		}
+	};
+	// guac连接
+	guac.connect();
+	// 窗口关闭后断开连接
+	window.onunload = function() {
+	    guac.disconnect();
+	}
+	// Mouse  鼠标事件
+	var mouse = new Guacamole.Mouse(guac.getDisplay().getElement());
+	mouse.onmousedown =
+	    mouse.onmouseup   =
+	        mouse.onmousemove = function(mouseState) {
+				$("#message").css("display","none");
+	            guac.sendMouseState(mouseState);
+	        };
+	// Keyboard 键盘事件
+	keyboard = new Guacamole.Keyboard(document);
+ 	keyboard.onkeydown = function (keysym) {
+	    guac.sendKeyEvent(1, keysym);
+	};
+	keyboard.onkeyup = function (keysym) {
+	    guac.sendKeyEvent(0, keysym);
+	};
+}
+
+//全屏
+$("#full").click(function (){
+	if($("#full").attr("full") == "0"){
+		$("#full").attr("full","1");
+	    var el = document.documentElement;
+	    var rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+	    guac.disconnect();
+	    reConnect(1);
+	    rfs.call(el);
+	}else{
+		$("#full").attr("full","0");
+	    var el = document;
+	    var cfs = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullScreen;
+	    guac.disconnect();
+	    reConnect(0);
+	    cfs.call(el);
+	}
+})
+
+
+//剪切板
+$("#copyText").click(function (){
+	keyboard.onkeydown = null;
+	keyboard.onkeyup = null;
+ 	 layer.prompt({title: '剪切板', closeBtn:0,formType: 2,end:function(){
+ 		keyboard.onkeydown = function (keysym) {
+ 		    guac.sendKeyEvent(1, keysym);
+ 		}
+ 		keyboard.onkeyup = function (keysym) {
+ 		    guac.sendKeyEvent(0, keysym);
+ 		}}
+ 	 }, function(text, index){
+	 	var stream = guac.createClipboardStream("text/plain");
+	    var writer = new Guacamole.StringWriter(stream);
+	    for (var i=0; i<text.length; i += 4096){
+	        writer.sendText(text.substring(i, i+4096));
+	    }
+	    writer.sendEnd();
+	    layer.close(index);
+  });
+})
+
+//快捷键
+$("#shortcutKey").click(function (){
+	if($("#shortcutKeyDiv").css("display") == "none"){
+		$("#shortcutKeyDiv").css("display","block");
+	}else{
+		$("#shortcutKeyDiv").css("display","none");
+	}
+})
+$(".ant-dropdown-menu-item").click(function (){
+	var sendType = $(this).find("span").attr("sendType");
+	if(sendType == 0){
+		sendKey([65507,65513,65535]); //Ctrl Alt Del
+	}else 	if(sendType == 1){
+		sendKey([65507,65513,65288]); //Ctrl Alt Back
+	}else 	if(sendType == 2){
+		sendKey([65511,68]); //Window D
+	}else 	if(sendType == 3){
+		sendKey([65511,69]); //Window E
+	}else 	if(sendType == 4){
+		sendKey([65511,82]); //Window R
+	}else 	if(sendType == 5){
+		sendKey([65511,88]); //Window R
+	}else 	if(sendType == 6){
+		sendKey([65511]); //Window
+	}
+})
+
+//向桌面发送按键
+function sendKey(nums){
+	nums.forEach(function (e){
+		guac.sendKeyEvent(1, e);
+	})
+	nums.forEach(function (e){
+		guac.sendKeyEvent(0, e);
+	})
+}
+
+
+
+ </script> 
+</body>
+</html>

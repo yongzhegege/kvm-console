@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ParamSetupDao">
+	<resultMap id="ParamSetupMap"  type="com.example.demo.empty.ParamSetup">
+		<result column="PARAM_ID" jdbcType="INTEGER" property="paramId" />
+		<result column="AGREEMENT" jdbcType="INTEGER" property="agreement" />
+		<result column="PARAM_NAME" jdbcType="VARCHAR" property="paramName" />
+		<result column="PARAM_VALUE" jdbcType="INTEGER" property="paramValue" />
+	</resultMap>
+ 
+ 	<sql id="Base_Column_List">
+ 		PARAM_ID,
+		AGREEMENT,
+		PARAM_NAME,
+		PARAM_VALUE
+	</sql>
+ 	
+ 	<sql id="Example_Where_Clause">
+ 		<where>
+			<if test="paramId != null">
+ 				AND PARAM_ID = #{paramId,jdbcType=INTEGER}
+ 			</if>
+		</where>
+ 	</sql>
+ 	
+	
+	
+	<select id="allSelectLists" resultMap="ParamSetupMap" parameterType="com.example.demo.empty.ParamSetup">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM T_PARAM_SETUP
+			<include refid="Example_Where_Clause" />
+	</select>
+  
+	<insert id="insert" parameterType="com.example.demo.empty.ParamSetup">
+ 		INSERT INTO T_PARAM_SETUP
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="agreement != null">
+ 				AGREEMENT,
+ 			</if>
+			<if test="paramName != null">
+ 				PARAM_NAME,
+ 			</if>
+ 			<if test="paramValue != null">
+ 				PARAM_VALUE,
+ 			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="agreement != null">
+ 				#{agreement,jdbcType=INTEGER},
+ 			</if>
+			<if test="paramName != null">
+ 				#{paramName,jdbcType=VARCHAR},
+ 			</if>
+			<if test="paramValue != null">
+ 				#{paramValue,jdbcType=VARCHAR},
+ 			</if>
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.example.demo.empty.ParamSetup">
+   		UPDATE T_PARAM_SETUP
+		<set>
+			<if test="agreement != null">
+ 				AGREEMENT = #{agreement,jdbcType=INTEGER},
+ 			</if>
+			<if test="paramName != null">
+ 				PARAM_NAME = #{paramName,jdbcType=VARCHAR},
+ 			</if>
+			<if test="paramValue != null">
+ 				PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+ 			</if>
+		</set>
+		WHERE PARAM_ID = #{paramId,jdbcType=INTEGER}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM T_PARAM_SETUP
+		WHERE PARAM_ID = #{paramId,jdbcType=INTEGER}
+	</delete>
+
+</mapper>
+

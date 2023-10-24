@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserVmDao">
+	<resultMap id="UserVmMap"  type="com.example.demo.empty.UserVm">
+		<result column="USER_VM_ID" jdbcType="INTEGER" property="userVmId" />
+		<result column="USER_ID" jdbcType="INTEGER" property="userId" />
+		<result column="VM_NAME" jdbcType="VARCHAR" property="vmName" />
+		<result column="AGREEMENT" jdbcType="INTEGER" property="agreement" />
+		<result column="HOST_NAME" jdbcType="VARCHAR" property="hostName" />
+		<result column="PORT" jdbcType="INTEGER" property="port" />
+		<result column="USERNAME" jdbcType="VARCHAR" property="username" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+		<result column="PARAMS" jdbcType="VARCHAR" property="params" />
+		<result column="DESC" jdbcType="VARCHAR" property="desc" />
+	</resultMap>
+ 
+ 	<sql id="Base_Column_List">
+ 		VM_NAME AS VM_NAME,
+ 		USER_VM_ID,
+		USER_ID,
+		AGREEMENT,
+		HOST_NAME,
+		PORT,
+		USERNAME,
+		PASSWORD,
+		PARAMS,
+		DESC
+	</sql>
+ 	
+ 	<sql id="Example_Where_Clause">
+ 		<where>
+			<if test="userId != null">
+ 				AND USER_ID = #{userId,jdbcType=INTEGER}
+ 			</if>
+		</where>
+ 	</sql>
+ 	
+	
+	
+	<select id="allSelectLists" resultMap="UserVmMap" parameterType="com.example.demo.empty.UserVm">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM T_USER_VM
+			<include refid="Example_Where_Clause" />
+		ORDER BY USER_VM_ID DESC
+	</select>
+	
+	<select id="doPageSelectUnbind" resultMap="UserVmMap" parameterType="com.example.demo.empty.UserVm">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM 
+			T_USER_VM 
+		WHERE 
+			VM_NAME 
+		NOT IN (
+			SELECT 
+				VM_NAME 
+			FROM 
+				T_USER_VM 
+			WHERE USER_ID = #{userId,jdbcType=INTEGER})
+			GROUP BY VM_NAME 
+			ORDER BY USER_VM_ID DESC
+	</select>
+	
+	
+	
+		<select id="load" parameterType="java.lang.Integer" resultType="com.example.demo.empty.UserVm">
+		SELECT
+			<include refid="Base_Column_List" />
+		 FROM 
+		 	T_USER_VM
+		 WHERE USER_VM_ID = #{userVmId,jdbcType=INTEGER}
+		</select>
+  
+	<insert id="insert" parameterType="com.example.demo.empty.UserVm">
+ 		INSERT INTO T_USER_VM
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+ 				USER_ID,
+ 			</if>
+			<if test="vmName != null">
+ 				VM_NAME,
+ 			</if>
+			<if test="agreement != null">
+ 				AGREEMENT,
+ 			</if>
+			<if test="hostName != null">
+ 				HOST_NAME,
+ 			</if>
+ 			<if test="port != null">
+ 				PORT,
+ 			</if>
+ 			<if test="username != null">
+ 				USERNAME,
+ 			</if>
+ 			<if test="password != null">
+ 				PASSWORD,
+ 			</if>
+ 			<if test="params != null">
+ 				PARAMS,
+ 			</if>
+ 			<if test="desc != null">
+ 				DESC,
+ 			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+ 				#{userId,jdbcType=INTEGER},
+ 			</if>
+			<if test="vmName != null">
+ 				#{vmName,jdbcType=VARCHAR},
+ 			</if>
+			<if test="agreement != null">
+ 				#{agreement,jdbcType=INTEGER},
+ 			</if>
+			<if test="hostName != null">
+ 				#{hostName,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="port != null">
+ 				#{port,jdbcType=INTEGER},
+ 			</if>
+ 			<if test="username != null">
+ 				#{username,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="password != null">
+ 				#{password,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="params != null">
+ 				#{params,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="desc != null">
+ 				#{desc,jdbcType=VARCHAR},
+ 			</if>
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.example.demo.empty.UserVm">
+   		UPDATE T_USER_VM
+		<set>
+			<if test="userId != null">
+ 				USER_ID = #{userId,jdbcType=INTEGER},
+ 			</if>
+			<if test="vmName != null">
+ 				VM_NAME = #{vmName,jdbcType=VARCHAR},
+ 			</if>
+			<if test="agreement != null">
+ 				AGREEMENT = #{agreement,jdbcType=INTEGER},
+ 			</if>
+			<if test="hostName != null">
+ 				HOST_NAME = #{hostName,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="port != null">
+ 				PORT = #{port,jdbcType=INTEGER},
+ 			</if>
+ 			<if test="username != null">
+ 				USERNAME = #{username,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="password != null">
+ 				PASSWORD = #{password,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="params != null">
+ 				PARAMS = #{params,jdbcType=VARCHAR},
+ 			</if>
+ 			<if test="desc != null">
+ 				DESC = #{desc,jdbcType=VARCHAR},
+ 			</if>
+		</set>
+		WHERE USER_VM_ID = #{userVmId,jdbcType=INTEGER}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM 
+			T_USER_VM
+		<where>
+			<if test="userId != null">
+ 				AND USER_ID = #{userId,jdbcType=INTEGER}
+ 			</if>
+ 			<if test="userVmId != null">
+ 				AND USER_VM_ID = #{userVmId,jdbcType=INTEGER}
+ 			</if>
+		</where>
+	</delete>
+
+</mapper>
+
