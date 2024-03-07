@@ -1,4 +1,0 @@
-url = jdbc:sqlite:C:\Users\hyids\Desktop\kvm.db
-showSql = true
-formatSql = false
-showParams = true
