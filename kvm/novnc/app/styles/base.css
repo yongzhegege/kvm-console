@@ -756,7 +756,7 @@ select:active {
   content: url("../images/info.svg") " ";
 }
 #noVNC_status.noVNC_status_error {
-  background: #313131;
+  background: #5793cf;
 }
 #noVNC_status.noVNC_status_error::before {
   content: url("../images/error.svg") " ";

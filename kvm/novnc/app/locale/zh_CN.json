@@ -7,7 +7,7 @@
     "Connected (encrypted) to ": "已加密链接到",
     "Connected (unencrypted) to ": "未加密链接到",
     "Something went wrong, connection is closed": "发生错误，链接已关闭",
-    "Failed to connect to server": "无法连接到客户机",
+    "Failed to connect to server": "Disconnect",
     "Disconnected": "链接已中断",
     "New connection has been rejected with reason: ": "链接被拒绝，原因：",
     "New connection has been rejected": "链接被拒绝",

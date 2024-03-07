@@ -34,7 +34,7 @@ import TightPNGDecoder from "./decoders/tightpng.js";
 
 // How many seconds to wait for a disconnect to finish
 const DISCONNECT_TIMEOUT = 3;
-const DEFAULT_BACKGROUND = 'rgb(250, 250, 250)';
+const DEFAULT_BACKGROUND = 'rgb(35, 87, 125)';
 
 // Extended clipboard pseudo-encoding formats
 const extendedClipboardFormatText   = 1;

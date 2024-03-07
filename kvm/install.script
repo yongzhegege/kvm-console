@@ -33,16 +33,16 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/mini-kvm.service
 echo "[Unit]
-Description=novnc
-After=syslog.target network.target
+Description=NOVNC Websockify Service
+After=network.target
+
 [Service]
-User=root
-WorkingDirectory=/opt/kvm/novnc
-ExecStart=python3 /opt/kvm/novnc/utils/websockify/websockify.py --web /opt/kvm/novnc 5080 --target-config=/opt/kvm/novnc/token.conf
-SuccessExitStatus=143
-TimeoutStopSec=10
-Restart=on-failure
-RestartSec=5
+Type=simple
+ExecStart=/usr/bin/python3 -m websockify --token-plugin TokenFile --token-source=/opt/kvm/novnc/token.conf 5080 --web /opt/kvm/novnc
+WorkingDirectory=/opt/kvm/novnc/utils/websockify
+Restart=always
+RestartSec=3
+
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/novnc.service
 systemctl daemon-reload
